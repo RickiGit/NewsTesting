@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/news_navigation"
+    app:startDestination="@id/categoriesFragment">
+
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.ricki.testing.View.Fragments.CategoriesFragment"
+        android:label="News Category"
+        app:defaultNavHost="true"
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/category_to_news_sources"
+            app:destination="@id/newsSourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsSourcesFragment"
+        android:name="com.ricki.testing.View.Fragments.NewsSourcesFragment"
+        android:label="Source News"
+        tools:layout="@layout/fragment_news_sources" >
+        <argument
+            android:name="categoryItem"
+            android:defaultValue="" />
+        <action
+            android:id="@+id/news_sources_to_category"
+            app:destination="@id/categoriesFragment"
+            app:exitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/sources_to_articles"
+            app:destination="@id/newsArticles" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsArticles"
+        android:name="com.ricki.testing.View.Fragments.NewsArticlesFragment"
+        android:label="News Article"
+        tools:layout="@layout/fragment_news_articles" >
+        <action
+            android:id="@+id/articles_to_detail"
+            app:destination="@id/newsDetailFragment"
+            app:enterAnim="@anim/fragment_fade_enter" />
+        <action
+            android:id="@+id/article_to_sources"
+            app:destination="@id/newsSourcesFragment"
+            app:exitAnim="@anim/fragment_fade_exit" />
+        <argument
+            android:name="idsource"
+            app:argType="string"
+            android:defaultValue=""/>
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.ricki.testing.View.Fragments.NewsDetailFragment"
+        android:label="News Detail"
+        tools:layout="@layout/fragment_news_detail" >
+        <action
+            android:id="@+id/detail_to_articles"
+            app:destination="@id/newsArticles"
+            app:exitAnim="@anim/fragment_fade_exit" />
+        <argument
+            android:name="articleItem"
+            app:argType="com.ricki.testing.Model.NewsArticleItemModel" />
+    </fragment>
+</navigation>
